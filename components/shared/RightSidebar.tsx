@@ -2,20 +2,26 @@ import { currentUser } from "@clerk/nextjs";
 
 import UserCard from "../cards/UserCard";
 
-import { fetchCommunities } from "@/lib/actions/community.actions";
-import { fetchUsers } from "@/lib/actions/user.actions";
+// import { fetchCommunities } from "@/lib/actions/community.actions";
+// import { fetchUsers } from "@/lib/actions/user.actions";
 
 async function RightSidebar() {
   const user = await currentUser();
   if (!user) return null;
 
-  const similarMinds = await fetchUsers({
-    userId: user.id,
-    pageSize: 4,
-  });
+  // const similarMinds = await fetchUsers({
+  //   userId: user.id,
+  //   pageSize: 4,
+  // });
 
-  const suggestedCOmmunities = await fetchCommunities({ pageSize: 4 });
+  // const suggestedCOmmunities = await fetchCommunities({ pageSize: 4 });
+  const suggestedCOmmunities = {
+    communities: []
+  };
 
+    const similarMinds = {
+      users: [],
+    };
   return (
     <section className='custom-scrollbar rightsidebar'>
       <div className='flex flex-1 flex-col justify-start'>
@@ -28,11 +34,11 @@ async function RightSidebar() {
             <>
               {suggestedCOmmunities.communities.map((community) => (
                 <UserCard
-                  key={community.id}
-                  id={community.id}
-                  name={community.name}
-                  username={community.username}
-                  imgUrl={community.image}
+                  key={community?.id}
+                  id={community?.id}
+                  name={community?.name}
+                  username={community?.username}
+                  imgUrl={community?.image}
                   personType='Community'
                 />
               ))}
@@ -52,11 +58,11 @@ async function RightSidebar() {
             <>
               {similarMinds.users.map((person) => (
                 <UserCard
-                  key={person.id}
-                  id={person.id}
-                  name={person.name}
-                  username={person.username}
-                  imgUrl={person.image}
+                  key={person?.id}
+                  id={person?.id}
+                  name={person?.name}
+                  username={person?.username}
+                  imgUrl={person?.image}
                   personType='User'
                 />
               ))}
