@@ -2,8 +2,10 @@ import React from 'react'
 
 const loading = () => {
   return (
-    <div>loading...</div>
-  )
+    <div>
+      <p className='text-white'>loading...</p>
+    </div>
+  );
 }
 
 export default loading
